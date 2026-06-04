@@ -24,6 +24,13 @@ const CHANGELOG_EPOCAS: EpochGroup[] = [
     `,
     versions: [
       {
+        v: 'v3.5.0.altair', date: 'Junio 2026',
+        items: [
+          'Integración de Lucide React: Refactorización completa del componente Icon y de todas las vistas (Home, Branch, Dashboards, About, Login, SelectRegion) reemplazando todos los SVGs inline por componentes optimizados de lucide-react.',
+          'Corrección de Tipos en SelectRegion: Añadido soporte de tipado para regiones_permitidas en el perfil de usuario y tipado estricto en la selección regional para resolver errores de compilación.'
+        ]
+      },
+      {
         v: 'v3.4.2.altair', date: 'Junio 2026',
         items: [
           'Exclusión de Cinemex y Cumbres: Remoción definitiva del mapa y de las configuraciones del Dashboard de las 8 ubicaciones en complejos Cinemex y de la sucursal Cumbres de Monterrey para evitar ruido visual y tarjetas vacías.',
