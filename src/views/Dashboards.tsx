@@ -13,6 +13,7 @@ import {
   LineTrendChart 
 } from '../components/DashboardCharts';
 import { getConcludedMonthInfo } from '../utils';
+import { ArrowRight, ChevronDown } from 'lucide-react';
 
 interface ProactiveAlert {
   type: 'critical' | 'attention' | 'optimal';
@@ -349,9 +350,7 @@ export const Dashboards: React.FC = () => {
               <div className="card-title">Resumen Trimestral<br /><span>Q1 2026</span></div>
               <span className="reporte-especial-btn">
                 Ver reporte completo
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" style={{ width: '16px', height: '16px' }}>
-                  <path d="M5 12H19M19 12L12 5M19 12L12 19" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                <ArrowRight size={16} />
               </span>
             </Link>
           </div>
@@ -375,9 +374,7 @@ export const Dashboards: React.FC = () => {
           >
             <button className="custom-select-trigger">
               <span className="custom-select-value">{capitalizedCurrMonth} {currentYear}</span>
-              <svg className="custom-select-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <ChevronDown className="custom-select-arrow" size={10} />
             </button>
             <div className="custom-select-options">
               {(manifest && manifest[currentYear] || []).map(m => (
@@ -501,9 +498,7 @@ export const Dashboards: React.FC = () => {
                       : `Ver Alertas Operativas Proactivas (${activeAlertsCount})`}
                 </span>
                 <span className="toggle-arrow">
-                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none" style={{ transform: alertsExpanded ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }}>
-                    <path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <ChevronDown size={12} style={{ transform: alertsExpanded ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s ease' }} />
                 </span>
               </button>
             </div>

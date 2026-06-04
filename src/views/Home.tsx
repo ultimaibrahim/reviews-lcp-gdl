@@ -12,6 +12,7 @@ import QuoteBlock from '../components/QuoteBlock';
 import Scorecard from '../components/Scorecard';
 import ReviewItem from '../components/ReviewItem';
 import Icon from '../components/Icon';
+import { ChevronDown } from 'lucide-react';
 
 export const Home: React.FC = () => {
   const {
@@ -531,9 +532,7 @@ export const Home: React.FC = () => {
                         }}
                       >
                         <span className="custom-select-value">{capitalizedCurrMonth} {currentYear}</span>
-                        <svg className="custom-select-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                          <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
+                        <ChevronDown className="custom-select-arrow" size={10} />
                       </button>
                       <div className="custom-select-options">
                         {(manifest && manifest[currentYear] || []).map(m => (
@@ -780,9 +779,7 @@ export const Home: React.FC = () => {
                     <span className="custom-select-value">
                       {sortBy === 'rating-desc' ? 'Mayor Rating' : sortBy === 'rating-asc' ? 'Menor Rating' : sortBy === 'volume-desc' ? 'Mayor Volumen' : 'Predeterminado'}
                     </span>
-                    <svg className="custom-select-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                      <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <ChevronDown className="custom-select-arrow" size={10} />
                   </button>
                   <div className="custom-select-options">
                     <div className={`custom-option ${sortBy === 'default' ? 'active' : ''}`} onClick={() => setSortBy('default')}>Predeterminado</div>
@@ -1201,9 +1198,7 @@ export const Home: React.FC = () => {
                     <span className="custom-select-value">
                       {sidebarSentiment === 'positivas' ? 'Positivas (4-5★)' : sidebarSentiment === 'neutras' ? 'Neutras (3★)' : sidebarSentiment === 'negativas' ? 'Negativas (1-2★)' : 'Todas las calificaciones'}
                     </span>
-                    <svg className="custom-select-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                      <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <ChevronDown className="custom-select-arrow" size={10} />
                   </button>
                   <div className="custom-select-options">
                     <div className={`custom-option ${sidebarSentiment === 'todas' ? 'active' : ''}`} onClick={() => setSidebarSentiment('todas')}>Todas las calificaciones</div>
@@ -1229,9 +1224,7 @@ export const Home: React.FC = () => {
                     <span className="custom-select-value">
                       {sidebarBranch === 'todas' ? 'Todas las sucursales' : sucursalesMeta.find(s => s.nombre === sidebarBranch)?.abr || sidebarBranch}
                     </span>
-                    <svg className="custom-select-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                      <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <ChevronDown className="custom-select-arrow" size={10} />
                   </button>
                   <div className="custom-select-options" style={{ maxHeight: '200px', overflowY: 'auto' }}>
                     <div className={`custom-option ${sidebarBranch === 'todas' ? 'active' : ''}`} onClick={() => setSidebarBranch('todas')}>Todas las sucursales</div>

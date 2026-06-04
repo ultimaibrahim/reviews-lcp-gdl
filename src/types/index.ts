@@ -27,6 +27,7 @@ export interface UserProfile {
   rol: 'admin' | 'analista' | 'regional' | 'zonal' | 'gerente';
   region: string;
   sucursal: string | null;
+  regiones_permitidas?: string[];
 }
 
 export interface BranchStats {

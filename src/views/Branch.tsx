@@ -9,6 +9,7 @@ import Topbar from '../components/Topbar';
 import RatingStars from '../components/RatingStars';
 import Icon from '../components/Icon';
 import { BranchRatingTrendChart, BranchVolumeTrendChart } from '../components/DashboardCharts';
+import { ChevronDown } from 'lucide-react';
 
 export const Branch: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -282,9 +283,7 @@ export const Branch: React.FC = () => {
               >
                 <button className="custom-select-trigger">
                   <span className="custom-select-value">{capitalizedMonth} {currentYear}</span>
-                  <svg className="custom-select-arrow" width="10" height="6" viewBox="0 0 10 6" fill="none">
-                    <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <ChevronDown className="custom-select-arrow" size={10} />
                 </button>
                 <div className="custom-select-options">
                   {[...availableMonths].sort((a, b) => b - a).map(m => (

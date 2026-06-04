@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import { REGION_NAME_MAP, SUCURSALES_META_ALL } from '../lib/data';
+import { ArrowLeft } from 'lucide-react';
 
 export const SelectRegion: React.FC = () => {
   const { userProfile, isAuthenticated, setActiveRegion, logout } = useApp();
@@ -28,45 +29,47 @@ export const SelectRegion: React.FC = () => {
   };
 
   const getRegionDetails = (id: string) => {
-    const branches = SUCURSALES_META_ALL.filter(s => s.region === id);
-    const count = branches.length;
-    
-    let desc = '';
-    if (id === 'GDL') desc = 'Jalisco · Regional';
-    else if (id === 'CDMX') desc = 'Valle de México';
-    else if (id === 'MTY') desc = 'Nuevo León';
-    else if (id === 'TJ') desc = 'Baja California';
-    else desc = 'Sucursal única';
-
-    return {
-      count,
-      desc
-    };
+    switch (id) {
+      case 'GDL':
+        return { name: 'Región Guadalajara', desc: 'Sede fundadora LCP. Monitoreo de 8 sucursales activas en Jalisco (incluyendo Andares unificado).' };
+      case 'CDMX':
+        return { name: 'Región Centro (CDMX)', desc: 'Zona metropolitana y sucursales satélites de la capital y Estado de México.' };
+      case 'NORTE':
+        return { name: 'Región Norte', desc: 'Sucursales en Monterrey, Tijuana y zonas norteñas del territorio nacional.' };
+      case 'BAJIO':
+        return { name: 'Región Bajío y Centro-Norte', desc: 'Puntos de venta en León, Querétaro, Aguascalientes y San Luis Potosí.' };
+      default:
+        return { name: `Región ${id}`, desc: 'Monitoreo consolidado de reseñas y KPIs operativos locales.' };
+    }
   };
 
   if (!isAuthenticated || (userProfile && userProfile.rol === 'gerente')) {
     return null;
   }
 
+  const allowedRegions = userProfile?.regiones_permitidas || Object.keys(REGION_NAME_MAP);
+
   return (
-    <div className="srv-wrapper">
-      <div className={`srv-container ${exitTransition ? 'exit-transition' : ''}`} id="srvContainer">
+    <div className={`select-region-screen ${exitTransition ? 'fade-out-exit' : ''}`}>
+      <div className="select-region-container">
         <div className="srv-header">
-          <span className="eyebrow" style={{ color: 'var(--verde)', fontWeight: 700 }}>
-            Monitoreo Regional
-          </span>
-          <h1 className="srv-title">Selecciona una Región</h1>
+          <div className="srv-logo-container">
+            <span className="srv-logo-text">La Crêpe Parisienne</span>
+          </div>
+          <h2 className="srv-title">Selección de Región Operativa</h2>
           <p className="srv-subtitle">
-            Elige el área operativa que deseas supervisar. Tu perfil administrativo te permite alternar libremente entre regiones.
+            Elige una región para ver su dashboard de reseñas, alertas de servicio y KPIs consolidados.
           </p>
         </div>
-        
+
         <div className="srv-grid">
-          {Object.entries(REGION_NAME_MAP).map(([id, name]) => {
-            const { count, desc } = getRegionDetails(id);
+          {allowedRegions.map((id: string) => {
+            const { name, desc } = getRegionDetails(id);
+            const count = SUCURSALES_META_ALL.filter(s => s.region === id).length;
+
             return (
               <div 
-                key={id} 
+                key={id}
                 className="srv-card" 
                 onClick={() => handleSelect(id)}
               >
@@ -87,10 +90,7 @@ export const SelectRegion: React.FC = () => {
         
         <div className="srv-header srv-footer">
           <button className="srv-back-login" onClick={logout}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="19" y1="12" x2="5" y2="12" />
-              <polyline points="12,19 5,12 12,5" />
-            </svg>
+            <ArrowLeft size={16} />
             <span>Regresar al Login</span>
           </button>
         </div>
